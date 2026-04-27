@@ -15,15 +15,33 @@ SYSTEM_PROMPT = """你是一个专业的技术调研助手,帮用户快速了解
 2. 用 web_search 搜索相关信息(可以多次搜索,从不同角度)
 3. 综合搜索结果,生成结构化的回答
 4. 输出格式:
-   - **核心要点**(3-5 条)
-   - **详细说明**
-   - **参考来源**(列出搜索到的 URL)
-   - **内容总长度不要超过200个字符**
+   输出格式必须严格遵循:
+    ## 核心要点
+    1. [要点1,简明扼要]
+    2. [要点2]
+    3. [要点3-5]
+
+    ## 详细说明
+
+    ### [子主题1]
+    [展开说明,引用具体来源]
+
+    ### [子主题2]
+    [展开说明]
+
+    ## 参考来源
+    - [来源1标题](URL)
+    - [来源2标题](URL)
 
 注意:
 - 优先使用近期(2024-2026)的资料
 - 如果搜索结果矛盾,要明确指出
-- 不知道的事就说不知道,不要编造"""
+- 不知道的事就说不知道,不要编造
+-【当前日期】{datetime.now().strftime('%Y年%m月%d日')}
+- 当用户提到"最新"、"最近"、"今年"时,请基于上述日期理解,
+- 不要使用你训练数据中的日期作为参考。
+"""
+
 
 load_dotenv()
 
@@ -46,6 +64,8 @@ def calculate(expression: str):
         return str(result)
     except Exception as e:
         return f"计算错误: {e}"
+    
+def gen_tool_result()
 
 
 def web_search(query: str, max_results: int = 5):
@@ -153,6 +173,7 @@ def run_agent(user_message: str, max_iterations: int = 5, verbose: bool = True):
         {"role": "user", "content": user_message}
     ]
 
+    MAX_FAILS_PER_TOOL = 2
     tool_fail_count = {}
     
     for iteration in range(max_iterations):
@@ -179,21 +200,28 @@ def run_agent(user_message: str, max_iterations: int = 5, verbose: bool = True):
         for tool_call in msg.tool_calls:
             fname = tool_call.function.name
             fargs = json.loads(tool_call.function.arguments)
-            
-            if verbose:
-                # web_search 的 query 全打印,其他工具简单打印
-                print(f"  → 调用 {fname}({fargs})")
-            
-            try:
-                if fname in TOOL_FUNCTIONS:
-                    result = TOOL_FUNCTIONS[fname](**fargs)
-                else:
-                    result = f"未知工具: {fname}"
-            except Exception as e:
-                result = f"工具执行异常: {e}"
-                tool_fail_count[fname] = tool_fail_count.get(fname, 0) + 1
-            if tool_fail_count.get(fname, 0) >= 1:
-                result += f"后续禁用工具：{fname}"
+
+            if tool_fail_count.get(fname, 0) >= MAX_FAILS_PER_TOOL:
+                result = json.dumps({
+                    "error": f"工具 {fname} 已被熔断(连续失败 {MAX_FAILS_PER_TOOL} 次,本次对话不再调用)",
+                    "suggestion": "请尝试其他工具或基于已有信息回答"
+                }, ensure_ascii=False)
+            else:
+                if verbose:
+                    # web_search 的 query 全打印,其他工具简单打印
+                    print(f"  → 调用 {fname}({fargs})")
+                
+                try:
+                    if fname in TOOL_FUNCTIONS:
+                        result = TOOL_FUNCTIONS[fname](**fargs)
+                        if isinstance(result, str) and ("error" in result.lower() or "失败" in result):
+                            tool_fail_count[fname] = tool_fail_count.get(fname, 0) + 1
+                    else:
+                        result = f"未知工具: {fname}"
+                except Exception as e:
+                    result = f"工具执行异常: {e}"
+                    tool_fail_count[fname] = tool_fail_count.get(fname, 0) + 1
+
             
             if verbose:
                 # 截断显示,避免 web_search 结果太长
