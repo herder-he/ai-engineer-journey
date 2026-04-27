@@ -65,9 +65,6 @@ def calculate(expression: str):
     except Exception as e:
         return f"计算错误: {e}"
     
-def gen_tool_result()
-
-
 def web_search(query: str, max_results: int = 5):
     """带重试和明确错误信息的搜索"""
     if not query or len(query.strip()) < 2:
