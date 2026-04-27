@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 from tavily import TavilyClient
 
-SYSTEM_PROMPT = """你是一个专业的技术调研助手,帮用户快速了解技术领域的新进展。
+SYSTEM_PROMPT = f"""你是一个专业的技术调研助手,帮用户快速了解技术领域的新进展。
 
 工作流程:
 1. 理解用户的调研问题
