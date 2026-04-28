@@ -1,0 +1,63 @@
+{
+  "timestamp": "2026-04-27T23:36:23.935870",
+  "avg_score": 10.0,
+  "results": [
+    {
+      "case_id": "rag_advances",
+      "question": "RAG 最近有什么新的优化方法?",
+      "answer_preview": "现在信息已经非常充分了，我来整理一份结构化的回答。\n\n## 核心要点\n\n1. **RAG 2.0（端到端联合优化）**：突破传统\"检索器+生成器\"组合式架构，通过端到端反向传播训练实现检索与生成一体化联合优化，是 2025-2026 年最重要的范式变革。\n2. **Agentic RAG 3.0（智能体驱动检索）**：RAG 从单向流水线升级为具备自主规划、多步推理、工具调用能力的智能体系统，成为",
+      "judgment": {
+        "structure_score": 10,
+        "structure_reason": "回答采用核心要点+详细说明+参考来源的清晰结构，层次分明，便于阅读和理解。",
+        "completeness_score": 10,
+        "completeness_reason": "完整覆盖了Agentic RAG、GraphRAG、Rerank、Hybrid Search、多模态等所有期望话题，并扩展了RAG 2.0、长上下文工程等前沿内容。",
+        "accuracy_score": 9,
+        "accuracy_reason": "内容符合当前RAG领域主流技术趋势，描述准确，无明显事实错误；但部分表述（如“Agentic RAG 3.0”的命名）可能带有一定行业宣传色彩，需注意区分。",
+        "timeliness_score": 10,
+        "timeliness_reason": "大量引用2025-2026年的最新进展，如RAG 2.0、Agentic RAG 3.0、百万级上下文窗口、MoC分块方法等，时效性极强。",
+        "source_score": 10,
+        "source_reason": "提供了13条可验证的参考链接，涵盖技术博客、学术论文、行业报告等，来源多样且可信。",
+        "overall_score": 10,
+        "overall_comment": "一份高质量、全面且时效性极强的技术综述，结构清晰，内容准确，来源可靠。"
+      }
+    },
+    {
+      "case_id": "agent_frameworks",
+      "question": "目前主流的 Agent 框架有哪些,各自特点?",
+      "answer_preview": "现在我有足够的信息了。以下是完整的回答：\n\n---\n\n## 核心要点\n\n1. **2026 年 Agent 框架格局已分层清晰**：不再\"百花齐放\"，而是按\"做什么类型的产品\"来选型——长流程编排、快速原型、企业级托管、多 Agent 协作各有对应框架。\n2. **两大巨头的 SDK 阵营**：OpenAI Agents SDK 与 Google ADK 分别代表\"极简 + OpenAI 生态\"和",
+      "judgment": {
+        "structure_score": 10,
+        "structure_reason": "回答包含清晰的核心要点、详细说明和参考来源，层次分明，便于阅读。",
+        "completeness_score": 10,
+        "completeness_reason": "完整覆盖了用户期望的LangChain、LangGraph、AutoGen、CrewAI，并扩展了OpenAI Agents SDK、Google ADK、Anthropic等主流框架。",
+        "accuracy_score": 9,
+        "accuracy_reason": "内容基本符合当前事实，如AutoGen与Semantic Kernel合并为MAF的描述准确，但部分细节（如2026年具体版本号）需依赖来源验证。",
+        "timeliness_score": 10,
+        "timeliness_reason": "大量引用了2025-2026年的更新，如MAF合并、OpenAI SDK沙箱、Claude Managed Agents公测等，时效性强。",
+        "source_score": 10,
+        "source_reason": "提供了14个可验证的参考链接，涵盖技术博客、新闻和社区讨论，来源多样且可信。",
+        "overall_score": 10,
+        "overall_comment": "高质量回答，结构严谨、内容全面、时效性强，且附有可靠来源，完全满足评审要求。"
+      }
+    },
+    {
+      "case_id": "vector_db",
+      "question": "向量数据库的选型该怎么考虑?",
+      "answer_preview": "以下是我基于截至2026年4月的最新信息，对向量数据库选型的系统化分析。\n\n---\n\n## 核心要点\n\n1. **没有\"最好\"的向量数据库，只有最匹配场景的** — 选型核心维度包括：数据规模、并发QPS要求、召回率敏感度、运维能力和预算\n2. **开源 vs 商业是首要分岔路** — Milvus（开源标杆）适合自建、有运维团队；Pinecone（商业标杆）适合快速上线、不想管基础设施；Qdra",
+      "judgment": {
+        "structure_score": 10,
+        "structure_reason": "回答包含清晰的核心要点、详细说明、决策树、检查清单和参考来源，层次分明，逻辑严谨。",
+        "completeness_score": 10,
+        "completeness_reason": "完整覆盖了Pinecone、Qdrant、Chroma、性能、成本等期望话题，并扩展了Milvus、Weaviate、国内云服务等，内容全面。",
+        "accuracy_score": 9,
+        "accuracy_reason": "内容符合当前行业事实，如Milvus为CNCF毕业项目、Qdrant支持混合搜索等，但部分成本数据（如腾讯云成本1/3）缺乏具体验证，略有主观性。",
+        "timeliness_score": 10,
+        "timeliness_reason": "明确标注基于2026年4月信息，提及DiskANN、Serverless、多模态等2025-2026年趋势，时效性强。",
+        "source_score": 10,
+        "source_reason": "提供了12个可验证的参考链接，涵盖CSDN、腾讯云、Firecrawl等权威或行业来源，来源可信度高。",
+        "overall_score": 10,
+        "overall_comment": "这是一份高质量、系统化的向量数据库选型指南，结构清晰、内容完整、时效性强且来源可靠，几乎无懈可击。"
+      }
+    }
+  ]
+}
